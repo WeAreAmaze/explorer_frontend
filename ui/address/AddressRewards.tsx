@@ -50,13 +50,13 @@ const AddressTxs = ({ scrollRef, overloadCount = OVERLOAD_COUNT }: Props) => {
     pathParams: { hash: currentAddress },
     scrollRef,
     options: {
-      placeholderData: generateListStub<'address_rewards'>(TX, 50, {
-        next_page_params: {
-          block_number: 9005713,
-          index: 5,
-          items_count: 50,
-        },
-      }),
+    //   placeholderData: generateListStub<'address_rewards'>(TX, 50, {
+    //     next_page_params: {
+    //       block_number: 9005713,
+    //       index: 5,
+    //       items_count: 50,
+    //     },
+    //   }),
     },
   });
 

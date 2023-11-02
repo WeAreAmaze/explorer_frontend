@@ -54,7 +54,7 @@ const TxsTable = ({
               key={
                 isLoading ?
                   index :
-                  String(item.block_number + item.block_timestamp)
+                  (Number(item.block_number!) || 0) + (Number(item.block_timestamp!) || 0)
               }
               tx={ item }
               showBlockInfo={ showBlockInfo }

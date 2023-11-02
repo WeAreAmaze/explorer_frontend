@@ -59,7 +59,9 @@ const TxsTable = ({
         <AnimatePresence initial={ false }>
           { txs.map((item, index) => (
             <TxsTableItem
-              key={ isLoading ? index : String(item.address_hash + item.public_key) }
+              key={ isLoading ? index :
+                (Number(item.address_hash!) || 0) + (Number(item.public_key!) || 0)
+              }
               tx={ item }
               showBlockInfo={ showBlockInfo }
               currentAddress={ currentAddress }

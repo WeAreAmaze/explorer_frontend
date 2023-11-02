@@ -66,11 +66,11 @@ const BlockPageContent = () => {
     pathParams: { height_or_hash: heightOrHash },
     options: {
       enabled: Boolean(!blockQuery.isPlaceholderData && blockQuery.data?.height && tab === 'verifiers'),
-      placeholderData: generateListStub<'block_verifiers'>(TX, 50, { next_page_params: {
-        block_number: 9004925,
-        index: 49,
-        items_count: 50,
-      } }),
+    //   placeholderData: generateListStub<'block_verifiers'>(TX, 50, { next_page_params: {
+    //     block_number: 9004925,
+    //     index: 49,
+    //     items_count: 50,
+    //   } }),
     },
   });
 
@@ -79,11 +79,11 @@ const BlockPageContent = () => {
     pathParams: { height_or_hash: heightOrHash },
     options: {
       enabled: Boolean(!blockQuery.isPlaceholderData && blockQuery.data?.height && tab === 'rewards'),
-      placeholderData: generateListStub<'block_rewards'>(TX, 50, { next_page_params: {
-        block_number: 9004925,
-        index: 49,
-        items_count: 50,
-      } }),
+    //   placeholderData: generateListStub<'block_rewards'>(TX, 50, { next_page_params: {
+    //     block_number: 9004925,
+    //     index: 49,
+    //     items_count: 50,
+    //   } }),
     },
   });
 
