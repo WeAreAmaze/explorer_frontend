@@ -114,12 +114,12 @@ const AddressPageContent = () => {
         title: 'Coin balance history',
         component: <AddressCoinBalance/>,
       },
-      {
+      addressQuery.data?.is_contract ? undefined : {
         id: 'verifiers',
         title: 'Verifiers',
         component: <AddressVerifiers/>,
       },
-      {
+      addressQuery.data?.is_contract ? undefined : {
         id: 'rewards',
         title: 'Rewards',
         component: <AddressRewards/>,

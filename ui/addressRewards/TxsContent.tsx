@@ -97,7 +97,7 @@ const TxsContent = ({
     <DataListDisplay
       isError={ isError }
       items={ data?.items }
-      emptyText="There are no verifiers."
+      emptyText="There are no rewards."
       content={ content }
       actionBar={ actionBar }
     />
