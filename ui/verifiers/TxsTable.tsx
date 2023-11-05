@@ -28,8 +28,8 @@ type Props = {
 
 const TxsTable = ({
   txs,
-  sort,
-  sorting,
+  //   sort,
+  //   sorting,
   top,
   showBlockInfo,
   showSocketInfo,

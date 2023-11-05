@@ -14,7 +14,9 @@ import getValueWithUnit from 'lib/getValueWithUnit';
 import useTimeAgoIncrement from 'lib/hooks/useTimeAgoIncrement';
 import { space } from 'lib/html-entities';
 import Icon from 'ui/shared/chakra/Icon';
+import CurrencyValue from 'ui/shared/CurrencyValue';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
+import AddressEntityMine from 'ui/shared/entities/address/AddressEntityMine';
 import BlockEntity from 'ui/shared/entities/block/BlockEntity';
 import TxEntity from 'ui/shared/entities/tx/TxEntity';
 import InOutTag from 'ui/shared/InOutTag';
@@ -31,12 +33,18 @@ type Props = {
   currentAddress?: string;
   enableTimeIncrement?: boolean;
   isLoading?: boolean;
-}
+};
 
 const TAG_WIDTH = 48;
 const ARROW_WIDTH = 24;
 
-const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeIncrement }: Props) => {
+const TxsListItem = ({
+  tx,
+  isLoading,
+  showBlockInfo,
+  currentAddress,
+  enableTimeIncrement,
+}: Props) => {
   const dataTo = tx.to ? tx.to : tx.created_contract;
 
   const isOut = Boolean(currentAddress && currentAddress === tx.from.hash);
@@ -44,11 +52,42 @@ const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeI
 
   const timeAgo = useTimeAgoIncrement(tx.timestamp, enableTimeIncrement);
 
+  // FORMAT MY DATA
+  const formatData = {
+    hash: tx.address_hash,
+    implementation_name: null,
+    is_contract: false,
+    is_verified: false,
+    name: null,
+    private_tags: [],
+    public_tags: [],
+    watchlist_names: [],
+  };
+
+  const addressFrom = (
+    <AddressEntityMine
+      address={{ ...formatData }}
+      isLoading={ isLoading }
+      noCopy={ isOut }
+      noLink={ isOut }
+      //   truncation="constant"
+      truncation="none"
+      w="100%"
+      py="2px"
+    />
+  );
+
   return (
     <ListItemMobile display="block" width="100%" isAnimated key={ tx.hash }>
       { tx.address_hash && (
         <Flex mt={ 3 }>
-          { /* <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">Method </Skeleton> */ }
+          <Skeleton
+            isLoaded={ !isLoading }
+            display="inline-block"
+            whiteSpace="pre"
+          >
+            Address&nbsp;
+          </Skeleton>
           { /* <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">Method </Skeleton> */ }
           <Skeleton
             isLoaded={ !isLoading }
@@ -57,12 +96,14 @@ const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeI
             whiteSpace="nowrap"
             textOverflow="ellipsis"
           >
-            <span>{ tx.address_hash }</span>
+            { addressFrom }
           </Skeleton>
         </Flex>
       ) }
       <Flex mt={ 3 }>
-        { /* <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">Method </Skeleton> */ }
+        <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">
+          { `Amount ${ config.chain.currency.symbol } ` }
+        </Skeleton>
         { /* <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">Method </Skeleton> */ }
         <Skeleton
           isLoaded={ !isLoading }
@@ -71,10 +112,9 @@ const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeI
           whiteSpace="nowrap"
           textOverflow="ellipsis"
         >
-          <span>{ tx.public_key }</span>
+          <CurrencyValue value={ tx.amount } accuracy={ 8 } isLoading={ isLoading }/>
         </Skeleton>
       </Flex>
-
     </ListItemMobile>
   );
 };

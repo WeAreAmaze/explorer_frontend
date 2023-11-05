@@ -95,7 +95,7 @@ const TxsTableItem = ({
       animate={{ opacity: 1, scale: 1 }}
       transitionDuration="normal"
       transitionTimingFunction="linear"
-      key={ tx.address_hash }
+      key={ tx.address_hash! }
     >
       <Td>
         <BlockEntity

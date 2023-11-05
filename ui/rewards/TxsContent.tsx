@@ -56,19 +56,37 @@ const TxsContent = ({
   const isMobile = useIsMobile();
 
   const content = data?.items ? (
-    <TxsTable
-      txs={ data.items }
-      sort={ setSortByField }
-      sorting={ sorting }
-      showBlockInfo={ showBlockInfo }
-      showSocketInfo={ showSocketInfo }
-      socketInfoAlert={ socketInfoAlert }
-      socketInfoNum={ socketInfoNum }
-      top={ top || query.pagination.isVisible ? 80 : 0 }
-      currentAddress={ currentAddress }
-      enableTimeIncrement={ enableTimeIncrement }
-      isLoading={ isPlaceholderData }
-    />
+    <>
+      <Show below="lg" ssr={ false }>
+        <Box>
+          { data.items.map((tx, index) => (
+            <TxsListItem
+              key={ isPlaceholderData ? index : Number(tx.address_hash!) || 0 }
+              tx={ tx }
+              currentAddress={ currentAddress }
+              enableTimeIncrement={ enableTimeIncrement }
+              isLoading={ isPlaceholderData }
+              showBlockInfo={ showBlockInfo }
+            />
+          )) }
+        </Box>
+      </Show>
+      <Hide below="lg" ssr={ false }>
+        <TxsTable
+          txs={ data.items }
+          sort={ setSortByField }
+          sorting={ sorting }
+          showBlockInfo={ showBlockInfo }
+          showSocketInfo={ showSocketInfo }
+          socketInfoAlert={ socketInfoAlert }
+          socketInfoNum={ socketInfoNum }
+          top={ top || query.pagination.isVisible ? 80 : 0 }
+          currentAddress={ currentAddress }
+          enableTimeIncrement={ enableTimeIncrement }
+          isLoading={ isPlaceholderData }
+        />
+      </Hide>
+    </>
   ) : null;
 
   const actionBar = isMobile ? (

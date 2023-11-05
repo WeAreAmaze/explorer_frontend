@@ -35,13 +35,13 @@ const TxsHeaderMobile = ({ filterComponent, sorting, setSorting, paginationProps
   return (
     <ActionBar className={ className }>
       <HStack>
-        { filterComponent }
-        <Sort
+        { /* { filterComponent } */ }
+        { /* <Sort
           options={ SORT_OPTIONS }
           setSort={ setSorting }
           sort={ sorting }
           isLoading={ paginationProps.isLoading }
-        />
+        /> */ }
         { /* api is not implemented */ }
         { /* <FilterInput
           // eslint-disable-next-line react/jsx-no-bind
