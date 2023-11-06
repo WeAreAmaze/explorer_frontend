@@ -4,8 +4,11 @@ import React from 'react';
 import { route } from 'nextjs-routes';
 
 import config from 'configs/app';
-import iconPlaceholder from 'icons/networks/icon-placeholder.svg';
+import logoPlaceholderWhite from 'icons/networks/AmazeToken_white.svg';
+import iconPlaceholder from 'icons/networks/icon-black.svg';
+import iconPlaceholderWhite from 'icons/networks/icon-white.svg';
 import logoPlaceholder from 'icons/networks/logo-placeholder.svg';
+// import logoPlaceholder from 'icons/networks/logo-placeholder_副本.svg';
 
 interface Props {
   isCollapsed?: boolean;
@@ -15,6 +18,9 @@ interface Props {
 const LogoFallback = ({ isCollapsed, isSmall }: { isCollapsed?: boolean; isSmall?: boolean }) => {
   const field = isSmall ? 'icon' : 'logo';
   const logoColor = useColorModeValue('blue.600', 'white');
+
+  const logoUrl = useColorModeValue(logoPlaceholder, logoPlaceholderWhite);
+  const iconUrl = useColorModeValue(iconPlaceholder, logoPlaceholderWhite);
 
   const display = isSmall ? {
     base: 'none',
@@ -32,7 +38,8 @@ const LogoFallback = ({ isCollapsed, isSmall }: { isCollapsed?: boolean; isSmall
 
   return (
     <Icon
-      as={ isSmall ? iconPlaceholder : logoPlaceholder }
+    //   as={ isSmall ? iconPlaceholder : logoPlaceholder }
+      as={ isSmall ? iconUrl : logoUrl }
       width="auto"
       height="100%"
       color={ logoColor }
